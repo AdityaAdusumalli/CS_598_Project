@@ -47,3 +47,34 @@ print(f"Updated PATH: {os.environ['PATH']}")
 
 8) Remove existing lock file and add project dependencies to use Poetry. 
 !rm poetry.lock
+!poetry add "ipython>=8.12.0,<9.0.0"
+!poetry add matplotlib-inline
+
+9) Install the project dependencies and navigate into the 'preparation' directory. 
+!poetry install
+%cd /content/dnn_ecg_comparison/
+%cd preparation
+
+10) Create directory structure for data and download the data.
+!mkdir -p ../data/PTBXL/raw
+!wget -O ../data/PTBXL/raw/ptb-xl-a-large-publicly-available-electrocardiography-dataset-1.0.1.zip https://physionet.org/static/published-projects/ptb-xl/ptb-xl-a-large-publicly-available-electrocardiography-dataset-1.0.1.zip
+
+11) Navigate into data directory, unzip the download, and rename the folder.
+%cd /content/dnn_ecg_comparison/data/PTBXL/raw/
+!unzip -o ptb-xl-a-large-publicly-available-electrocardiography-dataset-1.0.1.zip
+!mv ptb-xl-a-large-publicly-available-electrocardiography-dataset-1.0.1 ptbxl
+
+12) Move content to 'raw' directory, remove previous directory, enter the preperation directory
+!mv ptbxl/* .
+!rmdir ptbxl
+%cd /content/dnn_ecg_comparison/preparation/
+
+13)  Defines the corrected content for `preparation/utils.py`. Run the data preprocessing script for data split 1 on the 1000-record subset.
+
+Second to last cell in ipynb^
+
+15) Set up the `experiment/` directory structure. Write the correct content for `models.py`, `dataset.py`, and `resnet1d.py`. Create necessary `__init__.py` files for Python packaging. Writes the final, corrected `execute_clf_multilabel.py` script. Executes `!poetry run python execute_clf_multilabel.py resnet1d-18 cuda:0 1`. The output showing the training log and final Test AUC should appear below this cell.
+
+- Last Cell in ipynb^
+
+
